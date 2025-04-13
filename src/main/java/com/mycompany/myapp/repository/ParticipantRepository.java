@@ -27,14 +27,18 @@ public interface ParticipantRepository extends JpaRepository<Participant, Long> 
     }
 
     @Query(
-        value = "select participant from Participant participant left join fetch participant.user",
+        value = "select participant from Participant participant left join fetch participant.user where participant.user.login = ?#{authentication.name}",
         countQuery = "select count(participant) from Participant participant"
     )
     Page<Participant> findAllWithToOneRelationships(Pageable pageable);
 
-    @Query("select participant from Participant participant left join fetch participant.user")
+    @Query(
+        "select participant from Participant participant left join fetch participant.user where participant.user.login = ?#{authentication.name}"
+    )
     List<Participant> findAllWithToOneRelationships();
 
-    @Query("select participant from Participant participant left join fetch participant.user where participant.id =:id")
+    @Query(
+        "select participant from Participant participant left join fetch participant.user where participant.id =:id and participant.user.login = ?#{authentication.name}"
+    )
     Optional<Participant> findOneWithToOneRelationships(@Param("id") Long id);
 }

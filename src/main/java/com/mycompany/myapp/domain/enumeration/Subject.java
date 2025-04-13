@@ -4,7 +4,7 @@ package com.mycompany.myapp.domain.enumeration;
  * The Subject enumeration.
  */
 public enum Subject {
-    LINGUAGENS("Linguages"),
+    LINGUAGENS("Linguagens"),
     HUMANAS("Humanas"),
     NATUREZA("Natureza"),
     MATEMATICA("Matematica");

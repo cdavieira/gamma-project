@@ -15,7 +15,7 @@
       "fieldName": "subject",
       "fieldType": "Subject",
       "fieldValidateRules": ["required", "unique"],
-      "fieldValues": "LINGUAGENS (Linguages),HUMANAS (Humanas),NATUREZA (Natureza),MATEMATICA (Matematica)"
+      "fieldValues": "LINGUAGENS (Linguagens),HUMANAS (Humanas),NATUREZA (Natureza),MATEMATICA (Matematica)"
     }
   ],
   "name": "Score",

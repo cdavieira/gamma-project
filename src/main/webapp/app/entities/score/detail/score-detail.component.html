@@ -22,7 +22,7 @@
           <dt><span jhiTranslate="enemApp.score.subject">Subject</span></dt>
           <dd>
             <span [jhiTranslate]="'enemApp.Subject.' + (scoreRef.subject ?? 'null')">{{
-              { null: '', LINGUAGENS: 'Linguages', HUMANAS: 'Humanas', NATUREZA: 'Natureza', MATEMATICA: 'Matematica' }[
+              { null: '', LINGUAGENS: 'Linguagens', HUMANAS: 'Humanas', NATUREZA: 'Natureza', MATEMATICA: 'Matematica' }[
                 scoreRef.subject ?? 'null'
               ]
             }}</span>

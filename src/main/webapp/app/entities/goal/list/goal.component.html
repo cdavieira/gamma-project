@@ -72,7 +72,7 @@
               <td>{{ goal.value }}</td>
               <td [jhiTranslate]="'enemApp.Subject.' + (goal.subject ?? 'null')">
                 {{
-                  { null: '', LINGUAGENS: 'Linguages', HUMANAS: 'Humanas', NATUREZA: 'Natureza', MATEMATICA: 'Matematica' }[
+                  { null: '', LINGUAGENS: 'Linguagens', HUMANAS: 'Humanas', NATUREZA: 'Natureza', MATEMATICA: 'Matematica' }[
                     goal.subject ?? 'null'
                   ]
                 }}

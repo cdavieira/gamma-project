@@ -1,0 +1,34 @@
+diff --git a/src/main/webapp/app/entities/participant/list/participant.component.html b/src/main/webapp/app/entities/participant/list/participant.component.html
+index 73fe706..dee7331 100644
+--- a/src/main/webapp/app/entities/participant/list/participant.component.html
++++ b/src/main/webapp/app/entities/participant/list/participant.component.html
+@@ -9,6 +9,7 @@
+       </button>
+
+       <button
++        *jhiHasAnyAuthority="'ROLE_ADMIN'"
+         id="jh-create-entity"
+         data-cy="entityCreateButton"
+         class="btn btn-primary jh-create-entity create-participant"
+diff --git a/src/main/webapp/app/entities/participant/list/participant.component.ts b/src/main/webapp/app/entities/participant/list/participant.component.ts
+index 1190e33..d1a6596 100644
+--- a/src/main/webapp/app/entities/participant/list/participant.component.ts
++++ b/src/main/webapp/app/entities/participant/list/participant.component.ts
+@@ -8,6 +8,8 @@ import SharedModule from 'app/shared/shared.module';
+ import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
+ import { FormsModule } from '@angular/forms';
+
++//as in 'webapp/app/layouts/navbar/navbar.component.ts'
++import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
+ import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
+ import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
+ import { ParseLinks } from 'app/core/util/parse-links.service';
+@@ -19,7 +21,7 @@ import { IParticipant } from '../participant.model';
+ @Component({
+   selector: 'jhi-participant',
+   templateUrl: './participant.component.html',
+-  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, InfiniteScrollDirective],
++  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, InfiniteScrollDirective, HasAnyAuthorityDirective],
+ })
+ export class ParticipantComponent implements OnInit {
+   subscription: Subscription | null = null;

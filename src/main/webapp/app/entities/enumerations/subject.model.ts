@@ -1,5 +1,5 @@
 export enum Subject {
-  LINGUAGENS = 'Linguages',
+  LINGUAGENS = 'Linguagens',
 
   HUMANAS = 'Humanas',
 

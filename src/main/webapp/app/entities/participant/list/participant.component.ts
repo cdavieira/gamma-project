@@ -8,6 +8,8 @@ import SharedModule from 'app/shared/shared.module';
 import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
 import { FormsModule } from '@angular/forms';
 
+//as in 'webapp/app/layouts/navbar/navbar.component.ts'
+import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
 import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
 import { DEFAULT_SORT_DATA, ITEM_DELETED_EVENT, SORT } from 'app/config/navigation.constants';
 import { ParseLinks } from 'app/core/util/parse-links.service';
@@ -19,7 +21,7 @@ import { IParticipant } from '../participant.model';
 @Component({
   selector: 'jhi-participant',
   templateUrl: './participant.component.html',
-  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, InfiniteScrollDirective],
+  imports: [RouterModule, FormsModule, SharedModule, SortDirective, SortByDirective, InfiniteScrollDirective, HasAnyAuthorityDirective],
 })
 export class ParticipantComponent implements OnInit {
   subscription: Subscription | null = null;

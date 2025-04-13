@@ -72,7 +72,7 @@
               <td>{{ score.value }}</td>
               <td [jhiTranslate]="'enemApp.Subject.' + (score.subject ?? 'null')">
                 {{
-                  { null: '', LINGUAGENS: 'Linguages', HUMANAS: 'Humanas', NATUREZA: 'Natureza', MATEMATICA: 'Matematica' }[
+                  { null: '', LINGUAGENS: 'Linguagens', HUMANAS: 'Humanas', NATUREZA: 'Natureza', MATEMATICA: 'Matematica' }[
                     score.subject ?? 'null'
                   ]
                 }}
