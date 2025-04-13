@@ -27,18 +27,16 @@ public interface EditionResultsRepository extends JpaRepository<EditionResults, 
     }
 
     @Query(
-        value = "select editionResults from EditionResults editionResults left join fetch editionResults.participant where editionResults.participant.user.login = ?#{authentication.name}",
+        value = "select editionResults from EditionResults editionResults left join fetch editionResults.participant",
         countQuery = "select count(editionResults) from EditionResults editionResults"
     )
     Page<EditionResults> findAllWithToOneRelationships(Pageable pageable);
 
-    @Query(
-        "select editionResults from EditionResults editionResults left join fetch editionResults.participant where editionResults.participant.user.login = ?#{authentication.name}"
-    )
+    @Query("select editionResults from EditionResults editionResults left join fetch editionResults.participant")
     List<EditionResults> findAllWithToOneRelationships();
 
     @Query(
-        "select editionResults from EditionResults editionResults left join fetch editionResults.participant where editionResults.id =:id and editionResults.participant.user.login = ?#{authentication.name}"
+        "select editionResults from EditionResults editionResults left join fetch editionResults.participant where editionResults.id =:id"
     )
     Optional<EditionResults> findOneWithToOneRelationships(@Param("id") Long id);
 }

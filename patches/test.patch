@@ -4,18 +4,18 @@ index efb7fbb..31fbc26 100644
 +++ b/src/main/java/com/mycompany/myapp/repository/EditionResultsRepository.java
 @@ -27,16 +27,16 @@ public interface EditionResultsRepository extends JpaRepository<EditionResults,
      }
- 
+
      @Query(
 -        value = "select editionResults from EditionResults editionResults left join fetch editionResults.participant",
 +        value = "select editionResults from EditionResults editionResults left join fetch editionResults.participant where editionResults.participant.user.login = ?#{authentication.name}",
          countQuery = "select count(editionResults) from EditionResults editionResults"
      )
      Page<EditionResults> findAllWithToOneRelationships(Pageable pageable);
- 
+
 -    @Query("select editionResults from EditionResults editionResults left join fetch editionResults.participant")
 +    @Query("select editionResults from EditionResults editionResults left join fetch editionResults.participant where editionResults.participant.user.login = ?#{authentication.name}")
      List<EditionResults> findAllWithToOneRelationships();
- 
+
      @Query(
 -        "select editionResults from EditionResults editionResults left join fetch editionResults.participant where editionResults.id =:id"
 +        "select editionResults from EditionResults editionResults left join fetch editionResults.participant where editionResults.id =:id and editionResults.participant.user.login = ?#{authentication.name}"
@@ -28,18 +28,18 @@ index dc30b8d..31b0aea 100644
 +++ b/src/main/java/com/mycompany/myapp/repository/ParticipantRepository.java
 @@ -27,14 +27,14 @@ public interface ParticipantRepository extends JpaRepository<Participant, Long>
      }
- 
+
      @Query(
 -        value = "select participant from Participant participant left join fetch participant.user",
 +        value = "select participant from Participant participant left join fetch participant.user where participant.user.login = ?#{authentication.name}",
          countQuery = "select count(participant) from Participant participant"
      )
      Page<Participant> findAllWithToOneRelationships(Pageable pageable);
- 
+
 -    @Query("select participant from Participant participant left join fetch participant.user")
 +    @Query("select participant from Participant participant left join fetch participant.user where participant.user.login = ?#{authentication.name}")
      List<Participant> findAllWithToOneRelationships();
- 
+
 -    @Query("select participant from Participant participant left join fetch participant.user where participant.id =:id")
 +    @Query("select participant from Participant participant left join fetch participant.user where participant.id =:id and participant.user.login = ?#{authentication.name}")
      Optional<Participant> findOneWithToOneRelationships(@Param("id") Long id);
@@ -50,7 +50,7 @@ index 73fe706..dee7331 100644
 +++ b/src/main/webapp/app/entities/participant/list/participant.component.html
 @@ -9,6 +9,7 @@
        </button>
- 
+
        <button
 +        *jhiHasAnyAuthority="'ROLE_ADMIN'"
          id="jh-create-entity"
@@ -63,7 +63,7 @@ index 1190e33..d1a6596 100644
 @@ -8,6 +8,8 @@ import SharedModule from 'app/shared/shared.module';
  import { SortByDirective, SortDirective, SortService, type SortState, sortStateSignal } from 'app/shared/sort';
  import { FormsModule } from '@angular/forms';
- 
+
 +//as in 'webapp/app/layouts/navbar/navbar.component.ts'
 +import HasAnyAuthorityDirective from 'app/shared/auth/has-any-authority.directive';
  import { ITEMS_PER_PAGE } from 'app/config/pagination.constants';
