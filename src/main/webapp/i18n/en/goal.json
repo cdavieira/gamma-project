@@ -1,0 +1,26 @@
+{
+  "enemApp": {
+    "goal": {
+      "home": {
+        "title": "Goals",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Goal",
+        "createOrEditLabel": "Create or edit a Goal",
+        "notFound": "No Goals found"
+      },
+      "created": "A new Goal is created with identifier {{ param }}",
+      "updated": "A Goal is updated with identifier {{ param }}",
+      "deleted": "A Goal is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Goal {{ id }}?"
+      },
+      "detail": {
+        "title": "Goal"
+      },
+      "id": "ID",
+      "value": "Value",
+      "subject": "Subject",
+      "result": "Result"
+    }
+  }
+}

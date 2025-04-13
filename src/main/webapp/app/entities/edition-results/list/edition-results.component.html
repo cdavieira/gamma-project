@@ -1,0 +1,105 @@
+<div>
+  <h2 id="page-heading" data-cy="EditionResultsHeading">
+    <span jhiTranslate="enemApp.editionResults.home.title">Edition Results</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="enemApp.editionResults.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-edition-results"
+        [routerLink]="['/edition-results/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="enemApp.editionResults.home.createLabel">Create a new Edition Results</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (editionResults().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="enemApp.editionResults.home.notFound">No Edition Results found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="year">
+              <div class="d-flex">
+                <span jhiTranslate="enemApp.editionResults.year">Year</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="participant.name">
+              <div class="d-flex">
+                <span jhiTranslate="enemApp.editionResults.participant">Participant</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (editionResults of editionResults(); track trackId(editionResults)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/edition-results', editionResults.id, 'view']">{{ editionResults.id }}</a>
+              </td>
+              <td>{{ editionResults.year }}</td>
+              <td>
+                @if (editionResults.participant) {
+                  <div>
+                    <a [routerLink]="['/participant', editionResults.participant.id, 'view']">{{ editionResults.participant.name }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a
+                    [routerLink]="['/edition-results', editionResults.id, 'view']"
+                    class="btn btn-info btn-sm"
+                    data-cy="entityDetailsButton"
+                  >
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a
+                    [routerLink]="['/edition-results', editionResults.id, 'edit']"
+                    class="btn btn-primary btn-sm"
+                    data-cy="entityEditButton"
+                  >
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(editionResults)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

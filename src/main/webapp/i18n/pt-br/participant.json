@@ -1,0 +1,26 @@
+{
+  "enemApp": {
+    "participant": {
+      "home": {
+        "title": "Participants",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Participant",
+        "createOrEditLabel": "Criar ou editar Participant",
+        "notFound": "Nenhum Participant encontrado"
+      },
+      "created": "Um novo Participant foi criado com o identificador {{ param }}",
+      "updated": "Um Participant foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Participant foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Participant {{ id }}?"
+      },
+      "detail": {
+        "title": "Participant"
+      },
+      "id": "ID",
+      "name": "Name",
+      "user": "User",
+      "result": "Result"
+    }
+  }
+}

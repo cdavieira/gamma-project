@@ -1,0 +1,92 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-edition-results-heading"
+        data-cy="EditionResultsCreateUpdateHeading"
+        jhiTranslate="enemApp.editionResults.home.createOrEditLabel"
+      >
+        Create or edit a Edition Results
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="enemApp.editionResults.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let yearRef = editForm.get('year')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_year" jhiTranslate="enemApp.editionResults.year">Year</label>
+          <input type="number" class="form-control" name="year" id="field_year" data-cy="year" formControlName="year" />
+          @if (yearRef.invalid && (yearRef.dirty || yearRef.touched)) {
+            <div>
+              @if (editForm.get('year')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+              @if (editForm.get('year')?.errors?.min) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.min" [translateValues]="{ min: '1998' }"
+                  >This field should be at least 1998.</small
+                >
+              }
+              @if (editForm.get('year')?.errors?.max) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.max" [translateValues]="{ max: '2026' }"
+                  >This field cannot be more than 2026.</small
+                >
+              }
+              <small class="form-text text-danger" [hidden]="!editForm.get('year')?.errors?.number" jhiTranslate="entity.validation.number"
+                >This field should be a number.</small
+              >
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_participant" jhiTranslate="enemApp.editionResults.participant">Participant</label>
+          <select
+            class="form-control"
+            id="field_participant"
+            data-cy="participant"
+            name="participant"
+            formControlName="participant"
+            [compareWith]="compareParticipant"
+          >
+            @if (editForm.get(['participant'])!.value == null) {
+              <option [ngValue]="null" selected></option>
+            }
+            @for (participantOption of participantsSharedCollection; track $index) {
+              <option [ngValue]="participantOption">{{ participantOption.name }}</option>
+            }
+          </select>
+        </div>
+        @if (editForm.get(['participant'])!.invalid && (editForm.get(['participant'])!.dirty || editForm.get(['participant'])!.touched)) {
+          <div>
+            @if (editForm.get(['participant'])?.errors?.required) {
+              <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+            }
+          </div>
+        }
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

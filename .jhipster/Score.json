@@ -1,0 +1,34 @@
+{
+  "annotations": {
+    "changelogDate": "20250413133401"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "value",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMax": "1000",
+      "fieldValidateRulesMin": "0"
+    },
+    {
+      "fieldName": "subject",
+      "fieldType": "Subject",
+      "fieldValidateRules": ["required", "unique"],
+      "fieldValues": "LINGUAGENS (Linguages),HUMANAS (Humanas),NATUREZA (Natureza),MATEMATICA (Matematica)"
+    }
+  ],
+  "name": "Score",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityName": "editionResults",
+      "otherEntityRelationshipName": "score",
+      "relationshipName": "result",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    }
+  ],
+  "searchEngine": "no"
+}

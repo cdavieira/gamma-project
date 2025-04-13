@@ -1,0 +1,111 @@
+<div>
+  <h2 id="page-heading" data-cy="ScoreHeading">
+    <span jhiTranslate="enemApp.score.home.title">Scores</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="enemApp.score.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-score"
+        [routerLink]="['/score/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="enemApp.score.home.createLabel">Create a new Score</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (scores().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="enemApp.score.home.notFound">No Scores found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="value">
+              <div class="d-flex">
+                <span jhiTranslate="enemApp.score.value">Value</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="subject">
+              <div class="d-flex">
+                <span jhiTranslate="enemApp.score.subject">Subject</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="result.id">
+              <div class="d-flex">
+                <span jhiTranslate="enemApp.score.result">Result</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody infinite-scroll (scrolled)="loadNextPage()" [infiniteScrollDisabled]="!hasMorePage()" [infiniteScrollDistance]="0">
+          @for (score of scores(); track trackId(score)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/score', score.id, 'view']">{{ score.id }}</a>
+              </td>
+              <td>{{ score.value }}</td>
+              <td [jhiTranslate]="'enemApp.Subject.' + (score.subject ?? 'null')">
+                {{
+                  { null: '', LINGUAGENS: 'Linguages', HUMANAS: 'Humanas', NATUREZA: 'Natureza', MATEMATICA: 'Matematica' }[
+                    score.subject ?? 'null'
+                  ]
+                }}
+              </td>
+              <td>
+                @if (score.result) {
+                  <div>
+                    <a [routerLink]="['/edition-results', score.result.id, 'view']">{{ score.result.id }}</a>
+                  </div>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/score', score.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/score', score.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(score)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

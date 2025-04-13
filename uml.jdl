@@ -1,0 +1,36 @@
+enum Subject {
+  LINGUAGENS("Linguages"),
+  HUMANAS("Humanas"),
+  NATUREZA("Natureza"),
+  MATEMATICA("Matematica")
+}
+
+entity EditionResults {
+  year Integer required min(1998) max(2026)
+}
+
+entity Score {
+  value Integer required min(0) max(1000)
+  subject Subject required unique
+}
+
+entity Goal {
+  value Integer required min(0) max(1000)
+  subject Subject required unique
+}
+
+entity Participant {
+  name String required
+}
+
+relationship OneToOne {
+  Participant{user(login)} to User with builtInEntity
+}
+
+relationship ManyToOne {
+  EditionResults{participant(name) required} to Participant{result(year)}
+  Score{result required} to EditionResults{score}
+  Goal{result required} to EditionResults{goal}
+}
+
+paginate Participant, EditionResults, Score, Goal with infinite-scroll

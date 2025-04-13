@@ -1,0 +1,27 @@
+{
+  "enemApp": {
+    "editionResults": {
+      "home": {
+        "title": "Edition Results",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Edition Results",
+        "createOrEditLabel": "Criar ou editar Edition Results",
+        "notFound": "Nenhum Edition Results encontrado"
+      },
+      "created": "Um novo Edition Results foi criado com o identificador {{ param }}",
+      "updated": "Um Edition Results foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Edition Results foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Edition Results {{ id }}?"
+      },
+      "detail": {
+        "title": "Edition Results"
+      },
+      "id": "ID",
+      "year": "Year",
+      "participant": "Participant",
+      "score": "Score",
+      "goal": "Goal"
+    }
+  }
+}

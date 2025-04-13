@@ -8,7 +8,10 @@
       "entities": {
         "main": "Entidades",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)",
-        "adminAuthority": "Authority"
+        "editionResults": "Edition Results",
+        "score": "Score",
+        "goal": "Goal",
+        "participant": "Participant"
       },
       "account": {
         "main": "Conta",

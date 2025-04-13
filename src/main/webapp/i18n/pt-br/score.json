@@ -1,0 +1,26 @@
+{
+  "enemApp": {
+    "score": {
+      "home": {
+        "title": "Scores",
+        "refreshListLabel": "Atualizar lista",
+        "createLabel": "Criar novo Score",
+        "createOrEditLabel": "Criar ou editar Score",
+        "notFound": "Nenhum Score encontrado"
+      },
+      "created": "Um novo Score foi criado com o identificador {{ param }}",
+      "updated": "Um Score foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Score foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Score {{ id }}?"
+      },
+      "detail": {
+        "title": "Score"
+      },
+      "id": "ID",
+      "value": "Value",
+      "subject": "Subject",
+      "result": "Result"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (score(); as scoreRef) {
+      <div>
+        <h2 data-cy="scoreDetailsHeading"><span jhiTranslate="enemApp.score.detail.title">Score</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ scoreRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="enemApp.score.value">Value</span></dt>
+          <dd>
+            <span>{{ scoreRef.value }}</span>
+          </dd>
+          <dt><span jhiTranslate="enemApp.score.subject">Subject</span></dt>
+          <dd>
+            <span [jhiTranslate]="'enemApp.Subject.' + (scoreRef.subject ?? 'null')">{{
+              { null: '', LINGUAGENS: 'Linguages', HUMANAS: 'Humanas', NATUREZA: 'Natureza', MATEMATICA: 'Matematica' }[
+                scoreRef.subject ?? 'null'
+              ]
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="enemApp.score.result">Result</span></dt>
+          <dd>
+            @if (score()!.result) {
+              <div>
+                <a [routerLink]="['/edition-results', score()!.result?.id, 'view']">{{ scoreRef.result?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/score', scoreRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

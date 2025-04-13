@@ -1,0 +1,43 @@
+{
+  "annotations": {
+    "changelogDate": "20250413133400"
+  },
+  "applications": "*",
+  "fields": [
+    {
+      "fieldName": "year",
+      "fieldType": "Integer",
+      "fieldValidateRules": ["required", "min", "max"],
+      "fieldValidateRulesMax": "2026",
+      "fieldValidateRulesMin": "1998"
+    }
+  ],
+  "name": "EditionResults",
+  "pagination": "infinite-scroll",
+  "relationships": [
+    {
+      "otherEntityField": "name",
+      "otherEntityName": "participant",
+      "otherEntityRelationshipName": "result",
+      "relationshipName": "participant",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one",
+      "relationshipValidateRules": "required"
+    },
+    {
+      "otherEntityName": "score",
+      "otherEntityRelationshipName": "result",
+      "relationshipName": "score",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "goal",
+      "otherEntityRelationshipName": "result",
+      "relationshipName": "goal",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}
